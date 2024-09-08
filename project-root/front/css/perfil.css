@@ -1,0 +1,25 @@
+*  {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+nav {
+    height: 15vh!important;
+}
+header {
+    height: 20vh;
+}
+
+main {
+    height: 40vh;
+}
+
+p {
+    font-size: larger;
+    color: black;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
