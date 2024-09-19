@@ -23,11 +23,11 @@ async function entrarUsuario(event){
         alert(`${result.message}`+ '.' + 'Usuário autenticado!')
         autenticado = true
         const userData = {
+            Id: result.data[0].id_usuario,
             Nome: result.data[0].nome,
             autenticação: autenticado,
             Permissão: result.data[0].status_permissão
         }
-        console.log(userData.Nome)
         localStorage.setItem('login',JSON.stringify(userData))
         window.location.href = '../public/Dashboard/index.html'
         

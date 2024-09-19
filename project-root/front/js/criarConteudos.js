@@ -24,22 +24,22 @@ async function carregarProdutos(){
           let produto_tags_cadastro = produto.tags.trim()
           const col = document.createElement('div');
           col.className = 'col';
-
+          console.log(produto.imagem)
           const card_content = document.createElement('div')
-          card_content.className = `card card-content data-id=${produto.id_produto} mb-5`
+          card_content.className = `card card-content mb-5`
 
           // Adicionar o conteúdo HTML do card
           card_content.innerHTML = `
-              <img class="productImg" src="../../assets/" class="card-img-top card-img" alt="${produto.nome}">
+              <img class="productImg" src="../../uploads/${produto.imagem}" class="card-img-top card-img" alt="${produto.nome}">
               <div class="stars">
-                  <h5 class="avaliacaoProduto">${produto.avaliaçãoProduto}</h5>
+                  <h5 class="avaliacaoProduto">${produto.avaliacaoProduto}</h5>
                   <i class="fa-solid fa-star"></i>
               </div>
-              <div class="card-body-items">
+              <div class="card-body-items" data-id=${produto.id_produto}>
                   <h5 class="product-name">${produto.nome}</h5>
-                  <p>${produto.descriçãoProduto}</p>
+                  <p>${produto.descricaoProduto}</p>
                   <p class="product-price">R$ ${produto.valor.toFixed(2)}</p>
-                  <button href="#" class="btn btn-primary mb-2 add-to-cart">ADICIONAR AO CARRINHO</button>
+                  <button href="#" class="btn btn-primary mb-2" onclick="addProductToCart()">ADICIONAR AO CARRINHO</button>
               </div>
           `;
             col.appendChild(card_content)

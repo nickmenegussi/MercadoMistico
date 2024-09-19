@@ -1,15 +1,14 @@
 const express = require('express');
 const cors = require('cors');
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
-const path = require('path')
-
 const app = express();
+const multer = require('multer');
+const path = require('path');
+
 
 const port = 3001;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({limit: '10mb'}));
 
 //TESTE DE SERIVIDOR
 app.listen(port, () => console.log(`Rodando na porta ${port}`));
@@ -20,72 +19,118 @@ const connection = require('../back-end/config/db');
 // ROTA PARA CRIAR OS ITENS QUE IRÃO PARA O CARRINHO
 
 app.post('/carrinho/criar', (request, response) => {
-    const params = Array(
-       request.body.UsuarioId,
-       request.body.ProdutoId,
-       request.body.quantidade
-    )
-    
-    const query = `INSERT INTO Carrinho(UsuarioId, ProdutoId, quantidade) VALUES(?,?,?)`
-    connection.query(query, params, (err, result) => {
-        if(result){
-         response
-            .status(201)
-            .json({
-                message: 'sucesso',
-                success: true,
-                data: result
-            })
-        } else {
-         response 
-            .status(400)
-            .json({
-                message: 'erro',
-                success: false ,
-                data: err
-            })
-        }
-    })
-})
-// ROTA PARA CRIAR UM USUARIO ADM
+    const quantidade = 1
+    const UsuarioId = request.body.UsuarioId
+    const ProdutoId = request.body.ProdutoId
 
-app.post('/usuario/cadastrarAdmin', (request, response) => {
-    const {nome, email, senha,} = request.body 
+    if (!UsuarioId || !ProdutoId){
+        return response.status(400).json({success: false, message: "Preencha todos os campos de cadastro"})
 
-    if (!nome || !email || !senha ){
-        return response
-        .status(400)
-        .json({success: false, message: "Preencha todos os campos de cadastro"})
     }
 
-    const queryAdmin = `SELECT * FROM Usuario WHERE status_permissão = 'ADMIN'`
-    connection.query(queryAdmin, async (err, result) => {
-        if (err){
-            response
-                .status(500)
+    const queryUsuario = `
+        select id_usuario, id_produto
+        FROM Carrinho c, Usuario u, Produto p
+        WHERE c.UsuarioId = u.id_usuario
+        AND c.ProdutoId = p.id_produto
+        AND u.id_usuario = ?;
+    `
+    
+    connection.query(queryUsuario, [UsuarioId, ProdutoId], (err, result) => {
+        if(err){
+            return response
+                 .status(500)
+                 .json({
+                     success:false,
+                     message: 'Erro ao consultar dados',
+                     data: err
+                 })
+        }
+        
+        if (result.length > 0){
+            return response
+                .status(200)
                 .json({
-                    success:false,
-                    message: 'Erro ao verificar se existe um admin no sistema'
+                    success: true,
+                    message: `Voce ja adicionou esse produto`,
                 })
+        } else {
+            
+            const params = Array(
+                UsuarioId,
+                ProdutoId,
+                quantidade
+    
+            )
+            const query = `INSERT INTO Carrinho(UsuarioId, ProdutoId, quantidade) VALUES(?,?,?)`
+            connection.query(query, params, (err, result) => {
+    
+                if(result){
+                 return response
+                    .status(201)
+                    .json({
+                        message: 'sucesso ao criar o carrinho',
+                        success: true,
+                        data: result
+                    })
+                } else {
+                 return response 
+                    .status(400)
+                    .json({
+                        message: `Usuário com o id: ${UsuarioId} ou o Produto com o id: ${ProdutoId} não foram encontrados.`,
+                        success: false
+                    })
+                }
+            })
         }
     })
 })
+
+// fazer join no sql para unir a tabela de carrinho,usuarios e produtos.
 app.get('/carrinho/exibir', (request, response) => {
-    const query = `SELECT * FROM Carrinho WHERE UsuarioId = ?, `
-    connection.query(query, (err, result) => {
-        if (result){
-         response.status(201).json({
-                message: 'sucesso',
-                success: true,
-                data: result
-            })
-        } else {
-         response .status(400).json({
-                message: 'erro',
+    const usuario = request.query.UsuarioId
+    const produto = request.query.ProdutoId
+
+
+    connection.query('SELECT * FROM Carrinho WHERE ProdutoId = ? AND UsuarioId = ?', [produto,usuario], (err, resultCarrinho) => {
+        if(err){
+            return response.status(500).json({
                 success: false,
+                message: 'Erro ao encontrar o carrinho no nosso sistema.',
                 data: err
             })
         }
+
+        if(resultCarrinho.length === 0){
+            return response.status(400).json({
+                message: `Erro ao encontrar o id ${produto} do produto ou o id ${usuario} do usuario.`
+            })
+        }
+
+        const query = `SELECT p.nome, p.descricaoProduto, p.valor, p.imagem
+            FROM Carrinho c, Usuario u, Produto p
+            WHERE c.UsuarioId = u.id_usuario
+            AND c.ProdutoId = p.id_produto
+            AND u.id_usuario = c.UsuarioId;
+        
+        `
+        connection.query(query,(err,result) => {
+            if(err){
+                return response.status(500).json({
+                    message: 'Erro ao encontrar as informações no nosso sistema',
+                    success: false,
+                    data: err
+
+                })
+            }
+            return response.status(200).json({
+                message: 'Sucesso ao criar o carrinho',
+                success: true,
+                data: result
+            })
+        })
+            
+    
     })
 })
 
@@ -94,14 +139,14 @@ app.get('/carrinho/exibir', (request, response) => {
  app.post('/usuario/cadastrarAdmin', (request, response) => {
      const {nome, email, senha,} = request.body 
 
-     if (!nome || !email || !senha ){
-         response
-         .status(400)
-         .json({success: false, message: "Preencha todos os campos de cadastro"})
-     }
+    if (!nome || !email || !senha ){
+        return response
+        .status(400)
+        .json({success: false, message: "Preencha todos os campos de cadastro"})
+    }
 
      const queryAdmin = `SELECT * FROM Usuario WHERE status_permissão = 'ADMIN'`
-     connection.query(queryAdmin, async (err, result) => {
+     connection.query(queryAdmin, (err, result) => {
          if (err){
              response
                  .status(500)
@@ -179,33 +224,47 @@ app.put('/usuario/atualizarAdmin/:id', (request, response) => {
     }) 
 })
 app.delete('/usuario/deletarAdmin/:id', (request, response) => {
-    const params = Array(
-        request.params.id,
-        request.params.status_permissão
-    )
+    let id = request.params.id 
+    let status_permissão = request.body.status_permissão
+
+    if (!id || !status_permissão){
+        return response.status(400).json({
+            success: false,
+            message: "Preencha todos os campos."
+        });
+    }
+    
     const query = `DELETE FROM Usuario WHERE id_usuario = ? AND status_permissão = ?`
-    connection.query(query, params, (err, result) => {
-        if (result) {
+    connection.query(query, [id, status_permissão], (err, result) => {
+        if (err){
+            return response.status(500).json({
+                message: 'Erro ao procurar o Usuário no nosso sistema',
+                success: false,
+                data: err
+            })
+        }
+
+        if (result.affectedRows === 0){
+            return response.status(400).json({
+                message: `O usuário com o id ${id} e a permissão ${status_permissão}, não foram encontrado no nosso sitema`,
+                success: false,
+                data: err
+            })
+        } else{
             response
-                .status(201)
-                .json({
-                    message: "sucesso ao deletar adm",
-                    success: true,
-                    data: result
-                })
-        } else
-            response
-                .status(400)
-                .json({
-                    success: false,
-                    message: "erro ao deletar adm",
-                    data: err
-                })
+            .status(201)
+            .json({
+                message: `Sucesso ao deletar o administrador com o id: ${id}.`,
+                success: true,
+                data: result
+            })
+        }
     })
 })
 
 
 //ROTA POST CADASTRO DE USUÁRIOS TER ( CREATE, READ, UPDATE AND DELETE)
+
 app.post('/usuario/cadastrar', async (request, response) => {
     const { nome, email, senha, cpf_usuario} = request.body;
 
@@ -237,7 +296,7 @@ app.post('/usuario/cadastrar', async (request, response) => {
     });
 });
 
- app.post('/usuario/login', async (request, response) => {
+app.post('/usuario/login', async (request, response) => {
      const { email, senha } = request.body;
 
     // verificar se os campos estão preenchidos
@@ -397,25 +456,42 @@ app.get('/usuario/listar', (request, response) => {
 });
 
 // ROTAS PARA PRODUTO (CREATE, READ, UPDATE AND DELETE)
+// Configuração do Multer para armazenamento
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, '../front/uploads/'); // Define a pasta onde as imagens serão salvas
+    },
+    filename: (request, file, cb) => {
+        const fileName = request.body.nomeArquivo ? request.body.nomeArquivo : file.originalname;
 
-app.post('/product/cadastrar', (request, response) => {
+        cb(null, fileName + path.extname(file.originalname)); // Define o nome do arquivo salvo
+    }
+});
+
+
+// Aplicando o multer com as configurações
+const upload = multer({
+    storage: storage,
+})
+
+app.post('/product/cadastrar', upload.single('imagem'), (request, response) => {
     let params = Array(
         request.body.nome,
-        request.body.descriçãoProduto,
+        request.body.descricaoProduto, // Remover acento
         request.body.valor,
         request.body.tags,
-        request.body.imagem,
-        request.body.avaliaçãoProduto
+        request.file ? request.file.filename : null, // A imagem vem do request.file
+        request.body.avaliacaoProduto // Remover acento
     )
 
-    if (!params[0] || !params[1] || !params[2] || !params[3]|| !params[4] || !params[5]){
-        return response .status(400).json({
-            message: "Alguns campos então vazios, prencha todos os campos!",
+    if (!params[0] || !params[1] || !params[2] || !params[3] || !params[5]){
+        return response.status(400).json({
+            message: "Alguns campos estão vazios, preencha todos os campos!",
             success: false,
         })
     }
 
-    let query = 'INSERT INTO Produto(nome, descriçãoProduto, valor, tags,imagem, avaliaçãoProduto) VALUES(?,?,?,?,?,?)'
+    let query = 'INSERT INTO Produto(nome, descricaoProduto, valor, tags, imagem, avaliacaoProduto) VALUES(?,?,?,?,?,?)'
     connection.query(query, params, (err, result) => {
         if (result) {
             return response
@@ -430,7 +506,7 @@ app.post('/product/cadastrar', (request, response) => {
                 .status(400)
                 .json({
                     success: false,
-                    message: "erro ao adicionar os produtos",
+                    message: "Erro ao adicionar os produtos",
                     data: err
                 })
         }

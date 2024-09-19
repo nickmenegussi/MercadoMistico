@@ -62,31 +62,31 @@
                 </div>
             </div>
             <div class="card-forms mx-auto" style="width: 35rem;">
-                <div class="forms" id="#section1">
+                <div class="forms" id="#ection1">
                     <form id="productForm" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label class="form-label">Nome do produto</label>
+                            <label class="form-label" for="nome_produto">Nome do produto</label>
                             <input type="text" class="form-control" name="nome" id="nome_produto" placeholder="Nome">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Descrição</label>
-                            <input type="text" class="form-control" name="descricaoProduto" id="produtoDescricao">
+                            <label class="form-label" for="descricaoProduto">Descrição</label>
+                            <input type="text" class="form-control" name="descricaoProduto" id="descricaoProduto">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Preço</label>
+                            <label class="form-label" for="produtoPreco">Preço</label>
                             <input type="number" class="form-control" name="valor" id="produtoPreco">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Tags</label>
+                            <label class="form-label" for="produtoTags">Tags</label>
                             <input type="text" class="form-control" name="tags" id="produtoTags">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Avaliação do Produto</label>
-                            <input type="number" class="form-control" name="avaliacaoProduto" id="AvaliacaodoProduto">
+                            <label class="form-label" for="produtoImagem">Imagem</label>
+                            <input type="file" class="form-control" name="imagem" id="produtoImagem">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Imagem</label>
-                            <input type="text" class="form-control" name="imagem" id="produtoImagem">
+                            <label class="form-label" for="avaliacaoProduto">Avaliação do Produto</label>
+                            <input type="number" class="form-control" name="avaliacaoProduto" id="avaliacaoProduto">
                         </div>
                         <button type="submit" class="btn btn-primary" onclick="SalvarInformacoes(event)">Submit</button>
                     </form>

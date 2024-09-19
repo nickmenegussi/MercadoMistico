@@ -20,7 +20,7 @@ function exibirProdutos(produtos){
                     <td class="ProductTitle">${produto.nome}</td>
                     <td class="ProductTags">${produto.tags}</td>
                     <td class="ProductPrice">${produto.valor}</td>
-                    <td class="ProductFeeback">${produto.avaliaçãoProduto}</td>
+                    <td class="ProductFeeback">${produto.avaliacaoProduto}</td>
                         
          `
          conteudoTabela.appendChild(linhas_content)
