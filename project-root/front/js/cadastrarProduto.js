@@ -1,5 +1,12 @@
 async function SalvarInformacoes(event){
     event.preventDefault()
+
+    const nome = document.getElementById("nome_produto").value
+    const descricaoProduto = document.getElementById("descricaoProduto").value 
+    const valor = document.getElementById("produtoPreco").value
+    const tags = document.getElementById("produtoTags").value
+    const imagem = document.getElementById("produtoImagem").files[0]
+    const avaliacaoProduto = document.getElementById("avaliacaoProduto").value
     
     const formData = new FormData()
     formData.append('nome', nome)
@@ -17,18 +24,22 @@ async function SalvarInformacoes(event){
     const result = await response.json()
 
     if (result.success){
-        Swal.fire({
+        await Swal.fire({
             title: 'Produto',
             text: `${result.message}!`,
             icon: 'success',
-            confirmButtonText: 'OK'
+            confirmButtonText: 'OK',
+            timer: null // Remove o timer, permitindo interação do usuário
         })
+        
     } else {
-        Swal.fire({
+        await Swal.fire({
             title: 'Produto',
             text: `${result.message}!`,
             icon: 'warning',
-            confirmButtonText: 'OK'
+            confirmButtonText: 'OK',
+            allowOutsideClick: false, // Previne o fechamento ao clicar fora
+
         })
     }
 }

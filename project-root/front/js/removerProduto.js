@@ -21,7 +21,7 @@ async function RemoverProduto(event) {
     Swal.fire({
       title: 'Carrinho',
       text: `${result.message}!`,
-      icon: 'info',
+      icon: 'success',
       confirmButtonText: 'OK'
     })
   } else {
