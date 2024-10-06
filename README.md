@@ -38,6 +38,21 @@ Para acessar a documentação da API, siga os passos abaixo:
 
 4. **Instale as dependências do projeto:**
    - Execute o seguinte comando para instalar as dependências necessárias:
+   - ### Dependências
+
+      Aqui estão as dependências do projeto:
+      
+      - `body-parser`: ^1.20.2
+      - `cors`: ^2.8.5
+      - `dotenv`: ^16.4.5
+      - `express`: ^4.21.0
+      - `multer`: ^1.4.5-lts.1
+      - `mysql2`: ^3.11.0
+      - `nodemon`: ^3.1.4
+      - `swagger-jsdoc`: ^6.2.8
+      - `swagger-ui-express`: ^5.0.1
+      - `sweetalert2`: ^11.14.1
+
      ```bash
      npm install
      ```
@@ -53,19 +68,4 @@ Para acessar a documentação da API, siga os passos abaixo:
 6. **Verifique se a API está rodando:**
    - Após iniciar o servidor, você deve ver uma mensagem indicando que a API está escutando na porta 3001.
    - Se tudo estiver correto, você pode abrir um navegador da web e digitar o link `http://localhost:3001/api-docs/#/` na barra de endereços. Isso deve carregar a interface Swagger UI, onde você pode interagir com a documentação da sua API.
-
-### Dependências
-
-Aqui estão as dependências do projeto:
-
-- `body-parser`: ^1.20.2
-- `cors`: ^2.8.5
-- `dotenv`: ^16.4.5
-- `express`: ^4.21.0
-- `multer`: ^1.4.5-lts.1
-- `mysql2`: ^3.11.0
-- `nodemon`: ^3.1.4
-- `swagger-jsdoc`: ^6.2.8
-- `swagger-ui-express`: ^5.0.1
-- `sweetalert2`: ^11.14.1
 
