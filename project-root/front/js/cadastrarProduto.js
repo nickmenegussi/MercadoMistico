@@ -1,12 +1,5 @@
 async function SalvarInformacoes(event){
     event.preventDefault()
-
-    const nome = document.getElementById("nome_produto").value
-    const descricaoProduto = document.getElementById("descricaoProduto").value 
-    const valor = document.getElementById("produtoPreco").value
-    const tags = document.getElementById("produtoTags").value
-    const imagem = document.getElementById("produtoImagem").files[0]
-    const avaliacaoProduto = document.getElementById("avaliacaoProduto").value
     
     const formData = new FormData()
     formData.append('nome', nome)

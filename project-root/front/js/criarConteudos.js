@@ -38,7 +38,7 @@ async function carregarProdutos(){
                   <h5 class="avaliacaoProduto">${produto.avaliacaoProduto}</h5>
                   <i class="fa-solid fa-star"></i>
               </div>
-              <div class="card-body-items">
+              <div class="card-body-items" data-id=${produto.id_produto}>
                   <h5 class="product-name">${produto.nome}</h5>
                   <p class="product-descrition">${produto.descricaoProduto}</p>
                   <p class="product-price">R$ ${produto.valor.toFixed(2)}</p>

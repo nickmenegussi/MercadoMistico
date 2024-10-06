@@ -144,12 +144,6 @@ app.delete('/carrinho/deletar/:id', (request,response) => {
  app.post('/usuario/cadastrarAdmin', (request, response) => {
      const {nome, email, senha,} = request.body 
 
-    if (!nome || !email || !senha ){
-        return response
-        .status(400)
-        .json({success: false, message: "Preencha todos os campos de cadastro"})
-    }
-
      const queryAdmin = `SELECT * FROM Usuario WHERE status_permissão = 'ADMIN'`
      connection.query(queryAdmin, (err, result) => {
          if (err){

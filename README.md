@@ -68,3 +68,4 @@ Aqui estão as dependências do projeto:
 - `swagger-jsdoc`: ^6.2.8
 - `swagger-ui-express`: ^5.0.1
 - `sweetalert2`: ^11.14.1
+
