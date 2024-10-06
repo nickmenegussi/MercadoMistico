@@ -27,6 +27,11 @@ p {
     color: black;
     max-width: 30rem;
 }
+.product-descrition{
+    font-size: larger;
+    color: black;
+    max-width: 16em;
+}
 h3 {
     color: black!important;
 }
@@ -150,7 +155,7 @@ h3 {
 }
 
 a{
-    text-decoration: none;
+    text-decoration: none!important;
     color: black;
 }
 
@@ -162,4 +167,16 @@ a{
 }
 .navegação {
     display: flex;
+}
+.fv-button{
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #0d6efd;
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out; /* Suaviza as transições */
+
+}
+.fv-button:hover {
+    color: #0e5fd8; /* Altera a cor ao passar o mouse por cima */
+
 }

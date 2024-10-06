@@ -1,0 +1,56 @@
+.btn-addEndereço{
+    border: none!important;
+    background-color: none;
+}
+.productImg {
+    width: 80px;
+    height: 80px;
+}
+.steps {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px; /* Reduzi o gap para aproximar os elementos internos */
+    padding: 10px;
+}
+
+.titles {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10vh;
+}
+.step-1 {    
+    border: 1px solid;
+    width: 2vw;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+.containerTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.steps a {
+    text-decoration: none;
+    color: black;
+    padding: 0px 50px 10px 0px;
+    position: relative;
+    font: 25pt;
+  }
+  
+  .steps:hover a::after { /* Alteração aqui */
+    content: " ";
+    border: 1px solid black;
+    width: 0%;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    transition: width 0.5s ease-in-out; /* Alteração aqui */
+}
+  
+  .steps a:hover::after { /* Alteração aqui */
+    width: 100%;
+}

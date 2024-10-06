@@ -1,0 +1,177 @@
+.credit-card-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+}
+
+h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.credit-card {
+    background-color: #333;
+    color: white;
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chip {
+    width: 40px;
+    height: 30px;
+    background-color: #d4d4d4;
+    border-radius: 4px;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+.card-number {
+    margin-bottom: 20px;
+}
+
+.card-number label {
+    font-size: 12px;
+    color: #a9a9a9;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.card-number input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    background-color: #555;
+    color: white;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group {
+    width: 48%;
+}
+
+#paymentForm {
+    background-color: #ffffff; /* Fundo branco para o card */
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 20px;
+    max-width: 400px; /* Largura máxima do card */
+    margin: auto; /* Centraliza o card na página */
+}
+
+.form-group label {
+    font-size: 12px;
+    color: #a9a9a9;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #555;
+    color: white;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.total-section {
+    margin-top: 20px;
+}
+.steps {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+}
+.titles {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10vh;
+}
+.step-1 {    
+    border: 1px solid;
+    width: 2vw;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+.containerTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.steps a {
+    text-decoration: none;
+    color: black;
+    padding: 0px 50px 10px 0px;
+    position: relative;
+    font: 25pt;
+  }
+  
+  .steps:hover a::after { /* Alteração aqui */
+    content: " ";
+    border: 1px solid black;
+    width: 0%;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    transition: width 0.5s ease-in-out; /* Alteração aqui */
+}
+  
+  .steps a:hover::after { /* Alteração aqui */
+    width: 100%;
+}
+#totalAmount {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+.selecioneMetodo{
+    font-size: 16px!important;
+}
+
+.productImg {
+    width: 80px;
+    height: 80px;
+}

@@ -25,9 +25,19 @@ async function cadastrarUsuario(event){
     const result = await response.json()
 
     if (result.success){
-        alert("Cadastrado realizado com sucesso!")
+        await Swal.fire({
+            title: 'Cadastro',
+            text: `Cadastrado realizado com sucesso!`,
+            icon: 'success',
+            confirmButtonText: 'OK'
+        })
         window.location.href = '../public/login.html'
     } else {
-        alert("Erro ao cadastrar")
+        Swal.fire({
+            title: 'Cadastro',
+            text: `Erro ao cadastrar-se!`,
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        })
     }
 }

@@ -5,10 +5,14 @@ async function carregarProdutos(){
     if (result.success){
         exibirProdutos(result.data)
     } else {
-        alert(result.message)
+        Swal.fire({
+            title: 'Exibir Produtos',
+            text: `${result.message}`,
+            icon: 'info',
+            confirmButtonText: 'OK'
+          })
     }
 }
-
 
 function exibirProdutos(produtos){
     const conteudoTabela = document.querySelector('.conteudoTabela')
@@ -20,12 +24,13 @@ function exibirProdutos(produtos){
                     <td class="ProductTitle">${produto.nome}</td>
                     <td class="ProductTags">${produto.tags}</td>
                     <td class="ProductPrice">${produto.valor}</td>
-                    <td class="ProductFeeback">${produto.avaliaçãoProduto}</td>
+                    <td class="ProductFeeback">${produto.avaliacaoProduto}</td>
                         
          `
          conteudoTabela.appendChild(linhas_content)
 
-    });
+    })
     
 }
+
 carregarProdutos()

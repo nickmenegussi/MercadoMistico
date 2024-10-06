@@ -8,6 +8,9 @@ nav {
 header {
     height: 10vh;
 }
+.navbar-text{
+    color: white!important;
+}
 .headers-content {
     color: #343a40;
     display: flex;

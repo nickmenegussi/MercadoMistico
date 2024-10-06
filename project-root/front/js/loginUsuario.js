@@ -1,4 +1,4 @@
-async function entrarUsuario(event){
+async function entrarUsuario(event) {
     event.preventDefault()
 
     const email = document.getElementById('email').value
@@ -9,6 +9,7 @@ async function entrarUsuario(event){
         email,
         senha,
     }
+    
     // trocar rota para a de login
     const response = await fetch('http://localhost:3001/usuario/login', {
         method: 'POST',
@@ -19,20 +20,36 @@ async function entrarUsuario(event){
     }) 
 
     const result = await response.json()
-    if (result.success){
-        alert(`${result.message}`+ '.' + 'Usuário autenticado!')
+    
+    if (result.success) {
         autenticado = true
-        const userData = {
-            Nome: result.data[0].nome,
-            autenticação: autenticado,
-            Permissão: result.data[0].status_permissão
-        }
-        console.log(userData.Nome)
-        localStorage.setItem('login',JSON.stringify(userData))
+        const userData = [{
+            Id: result.data[0].id_usuario,
+            email: result.data[0].email,
+            name: result.data[0].nome,
+            autentication: autenticado,
+            permission: result.data[0].status_permissão.toUpperCase()
+        }]
+        
+        localStorage.setItem('login', JSON.stringify(userData))
+        
+        // Exibir SweetAlert e aguardar fechamento
+        await Swal.fire({
+            title: 'Autenticação',
+            text: `${result.message}. Usuário autenticado!`,
+            icon: 'success',
+            confirmButtonText: 'Ok'
+        })
+        // Redirecionar após o usuário fechar o alerta
         window.location.href = '../public/Dashboard/index.html'
+        return
         
     } else {
-        alert(result.message)
+        Swal.fire({
+            title: 'Autenticação',
+            text: `${result.message}`,
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        })
     }
-
 }

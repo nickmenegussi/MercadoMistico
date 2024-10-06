@@ -37,8 +37,18 @@ async function NovasInformacoes(event) {
   const result = await response.json();
 
   if (result.success) {
-    alert(result.message)
+    Swal.fire({
+      title: 'Produto',
+      text: `${result.message}!`,
+      icon: 'success',
+      confirmButtonText: 'OK'
+  })
   } else {
-    alert(result.message)
+    Swal.fire({
+      title: 'Produto',
+      text: `${result.message}!`,
+      icon: 'warning',
+      confirmButtonText: 'OK'
+  })
   }
 }
