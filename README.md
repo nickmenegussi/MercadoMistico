@@ -21,7 +21,7 @@ Para acessar a documentação da API, siga os passos abaixo:
      ```bash
      git clone https://github.com/nick/MERCADO_MISTICO.git
      ```
-   - Substitua `seu_usuario` pelo seu nome de usuário do GitHub e `MERCADO_MISTICO` pelo nome do seu repositório.
+   - Substitua `nick` pelo seu nome de usuário do GitHub e `MERCADO_MISTICO` pelo nome do seu repositório.
 
 2. **Navegue até o diretório do projeto:**
    - Acesse o diretório clonado:
@@ -38,25 +38,25 @@ Para acessar a documentação da API, siga os passos abaixo:
 
 4. **Instale as dependências do projeto:**
    - Execute o seguinte comando para instalar as dependências necessárias:
-   - ### Dependências
-
-      Aqui estão as dependências do projeto:
-      
-      - `body-parser`: ^1.20.2
-      - `cors`: ^2.8.5
-      - `dotenv`: ^16.4.5
-      - `express`: ^4.21.0
-      - `multer`: ^1.4.5-lts.1
-      - `mysql2`: ^3.11.0
-      - `nodemon`: ^3.1.4
-      - `swagger-jsdoc`: ^6.2.8
-      - `swagger-ui-express`: ^5.0.1
-      - `sweetalert2`: ^11.14.1
-
      ```bash
      npm install
      ```
    - Isso instalará todas as dependências que estão listadas no seu arquivo `package.json`.
+
+### Dependências
+
+Aqui estão as dependências do projeto:
+
+- `body-parser`: ^1.20.2
+- `cors`: ^2.8.5
+- `dotenv`: ^16.4.5
+- `express`: ^4.21.0
+- `multer`: ^1.4.5-lts.1
+- `mysql2`: ^3.11.0
+- `nodemon`: ^3.1.4
+- `swagger-jsdoc`: ^6.2.8
+- `swagger-ui-express`: ^5.0.1
+- `sweetalert2`: ^11.14.1
 
 5. **Inicie o servidor da API:**
    - Execute o comando abaixo no terminal para iniciar o servidor:
@@ -69,3 +69,12 @@ Para acessar a documentação da API, siga os passos abaixo:
    - Após iniciar o servidor, você deve ver uma mensagem indicando que a API está escutando na porta 3001.
    - Se tudo estiver correto, você pode abrir um navegador da web e digitar o link `http://localhost:3001/api-docs/#/` na barra de endereços. Isso deve carregar a interface Swagger UI, onde você pode interagir com a documentação da sua API.
 
+### Baixando as Dependências
+
+Para garantir que todas as dependências sejam baixadas corretamente, siga estas instruções:
+
+- **Passo 1:** Após executar `npm install`, o npm irá ler o arquivo `package.json` e baixar todas as dependências listadas.
+- **Passo 2:** Você verá uma série de mensagens no terminal enquanto as dependências são instaladas. O npm pode baixar pacotes de uma rede de repositórios, e isso pode levar alguns minutos, dependendo da sua conexão com a internet.
+- **Passo 3:** Uma vez que a instalação for concluída, você verá uma mensagem como `added X packages in Y seconds`, indicando que todas as dependências foram instaladas com sucesso.
+
+Agora você está pronto para usar a API MERCADO MISTICO!
