@@ -19,7 +19,7 @@ Para acessar a documentação da API, siga os passos abaixo:
 1. **Clone o repositório:**
    - Para clonar o repositório, execute o seguinte comando no terminal:
      ```bash
-     git clone https://github.com/nick/MERCADO_MISTICO.git
+     git clone https://github.com/nickmenegussi/MercadoMistico
      ```
    - Substitua `nick` pelo seu nome de usuário do GitHub e `MERCADO_MISTICO` pelo nome do seu repositório.
 
