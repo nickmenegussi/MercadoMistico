@@ -114,26 +114,37 @@ app.get('/carrinho/exibir', (request, response) => {
 
 app.delete('/carrinho/deletar/:id', (request,response) => {
     const idProduto = request.params.id
-
-    connection.query('DELETE FROM Carrinho WHERE ProdutoId = ?', idProduto, (err,result) => {
-        if(err){
+    connection.query('DELETE FROM Compra WHERE CarrinhoId = ?', [idProduto], (err, result) => {
+        if (err) {
             return response.status(500).json({
                 success: false,
-                message: 'Erro ao encontrar os itens do carrinho no nosso sistema.',
-                data: err
+                message: 'Erro ao encontrar os itens da compra no nosso sistema.',
+                data: err,
             })
         }
 
-        if(result.affectedRows === 0){
-            return response.status(400).json({
-                success: false,
-                message: `Erro ao encontrar o id ${idProduto} do produto.`
+        // Agora exclua o produto do Carrinho
+        connection.query('DELETE FROM Carrinho WHERE ProdutoId = ?', [idProduto], (err, result) => {
+            if (err) {
+                return response.status(500).json({
+                    success: false,
+                    message: 'Erro ao encontrar os itens do carrinho no nosso sistema.',
+                    data: err,
+                })
+            }
+
+            if (result.affectedRows === 0) {
+                return response.status(400).json({
+                    success: false,
+                    message: `Erro ao encontrar o id ${idProduto} do produto.`,
+                })
+            }
+
+            return response.status(200).json({
+                message: `Sucesso ao remover o id ${idProduto} do carrinho!`,
+                success: true,
+                data: result,
             })
-        }
-        return response.status(200).json({
-            message: `Sucesso ao remover o id ${idProduto} do carrinho!`,
-            success: true,
-            data: result
         })
     })
 })
