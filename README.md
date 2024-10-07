@@ -76,5 +76,7 @@ Para garantir que todas as dependências sejam baixadas corretamente, siga estas
 - **Passo 1:** Após executar `npm install`, o npm irá ler o arquivo `package.json` e baixar todas as dependências listadas.
 - **Passo 2:** Você verá uma série de mensagens no terminal enquanto as dependências são instaladas. O npm pode baixar pacotes de uma rede de repositórios, e isso pode levar alguns minutos, dependendo da sua conexão com a internet.
 - **Passo 3:** Uma vez que a instalação for concluída, você verá uma mensagem como `added X packages in Y seconds`, indicando que todas as dependências foram instaladas com sucesso.
+### Passo Adicional: Cadastro do Admin
+Para garantir que o site funcione corretamente, é necessário realizar o cadastro de um administrador utilizando a rota apropriada antes de acessar outras funcionalidades. O administrador será responsável por gerenciar usuários, produtos e demais operações críticas da plataforma.
 
 Agora você está pronto para usar a API MERCADO MISTICO!
