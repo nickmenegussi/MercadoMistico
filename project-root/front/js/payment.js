@@ -215,6 +215,8 @@ async function confirmedPurchase(event){
         confirmButtonText: 'OK'
       })
       window.location.href = 'index.html'
+    localStorage.removeItem('carrinho')
+
 }
 
 const dadosJson = localStorage.getItem('carrinho')
