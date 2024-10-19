@@ -48,7 +48,6 @@ async function addProductToCart(UsuarioId, ProdutoId, ProdutoValor ,ProdutoNome)
 
 
 }
-addProductToCart()
 
 function updateCartAccount(){
   const dadosJson = localStorage.getItem('carrinho')
